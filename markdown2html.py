@@ -1,50 +1,45 @@
 #!/usr/bin/python3
+
 """
-A script that converts Markdown to HTML.
+markdown2html.py: A script to convert Markdown files to HTML.
 """
 
 import sys
 import os
-import re
 
-def convert_markdown_to_html(input_file, output_file):
+def markdown_to_html(input_file, output_file):
     """
-    Converts a Markdown file to HTML and writes the output to a file.
+    Converts a Markdown file to an HTML file.
+
+    Arguments:
+    input_file -- the name of the Markdown file to be converted
+    output_file -- the name of the output HTML file
     """
-    # Check that the Markdown file exists and is a file
-    if not (os.path.exists(input_file) and os.path.isfile(input_file)):
-        print(f"Missing {input_file}", file=sys.stderr)
-        sys.exit(1)
+    try:
+        with open(input_file, 'r') as md_file:
+            md_content = md_file.read()
+        
+        html_content = md_content.replace('#', '<h1>').replace('\n', '<br>')
+        
+        with open(output_file, 'w') as html_file:
+            html_file.write(html_content)
 
-    # Read the Markdown file and convert it to HTML
-    with open(input_file, encoding="utf-8") as f:
-        html_lines = []
-        for line in f:
-            # Check for Markdown headings
-            match = re.match(r"^(#+) (.*)$", line)
-            if match:
-                heading_level = len(match.group(1))
-                heading_text = match.group(2)
-                html_lines.append(f"<h{heading_level}>{heading_text}</h{heading_level}>")
-            else:
-                html_lines.append(line.rstrip())
-
-    # Write the HTML output to a file
-    with open(output_file, "w", encoding="utf-8") as f:
-        f.write("\n".join(html_lines))
+    except Exception as e:
+        print(f"An error occurred: {e}", file=sys.stderr)
+        exit(1)
 
 if __name__ == "__main__":
-    # Check that the correct number of arguments were provided
-    if len(sys.argv) != 3:
-        print("Usage: ./markdown2html.py <input_file> <output_file>", file=sys.stderr)
-        sys.exit(1)
-
-    # Get the input and output file names from the command-line arguments
+    if len(sys.argv) < 3:
+        print("Usage: ./markdown2html.py README.md README.html", file=sys.stderr)
+        exit(1)
+    
     input_file = sys.argv[1]
     output_file = sys.argv[2]
+    
+    if not os.path.isfile(input_file):
+        print(f"Missing {input_file}", file=sys.stderr)
+        exit(1)
+    
+    markdown_to_html(input_file, output_file)
+    exit(0)
 
-    # Convert the Markdown file to HTML and write the output to a file
-    convert_markdown_to_html(input_file, output_file)
-
-    # Exit with a successful status code
-    sys.exit(0)
