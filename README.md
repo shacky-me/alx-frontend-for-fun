@@ -39,11 +39,11 @@ Read or watch:
 - [:valid - CSS: Cascading Style Sheets | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/:valid)
 - [:optional - CSS: Cascading Style Sheets | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/:optional)
 
-[A Crash Course on Accessibility](https://intranet.alxswe.com/concepts/549)
+- [A Crash Course on Accessibility](https://intranet.alxswe.com/concepts/549)
 
 ![alt text](image.png)
 
-#Read or watch:
+# Read or watch:
 
 * [Accessibility is not a feature. — Ethan Marcotte](https://ethanmarcotte.com/wrote/accessibility-is-not-a-feature/)
 * [How to Meet WCAG (Quickref Reference](https://www.w3.org/WAI/WCAG22/quickref/?versions=2.1)
